@@ -3,3 +3,5 @@ https://tomcat.apache.org/whichversion.html
 https://hibernate.org/orm/
 https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project
 https://getbootstrap.com/docs/5.1/getting-started/download/
+https://www.uv.mx/infosegura/general/noti_cifrado-18/
+https://www.tutorialesprogramacionya.com/mysqlya/temarios/descripcion.php?cod=86&punto=84&inicio=

@@ -22,8 +22,8 @@ public class LoginService extends HttpServlet {
         String username = (String) request.getParameter("username");
         String pwd = (String) request.getParameter("pwd");
         try{
-            System.out.println("Usuario: "+ username);
-            System.out.println("Pwd: "+ pwd);
+            //System.out.println("Usuario: "+ username);
+            //System.out.println("Pwd: "+ pwd);
             User user = Model.getInstance().searchUser(username, pwd);
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);

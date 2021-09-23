@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
-
-/**
- *
- * @author arnol
- */
+@javax.persistence.Entity
+@javax.persistence.Table( name = "SI_USERS" )
 public class User {
+    @javax.persistence.Id
+    @javax.persistence.Column( name = "PK_USER" )
     String pwd;
     String username;
     String role;

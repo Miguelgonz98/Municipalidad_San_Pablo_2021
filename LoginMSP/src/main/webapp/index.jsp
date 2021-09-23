@@ -10,7 +10,7 @@
     <jsp:directive.include file="header.jsp" />
     <body background-color: black>
 
-        <form action="ServicioLogin" method="post">
+        <form action="LoginService" method="post">
             <div class="imgcontainer">
                 <img src="css/image/user.jpg" alt="Avatar" class="avatar" width="250" height="150">
                 

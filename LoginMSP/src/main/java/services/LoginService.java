@@ -23,7 +23,6 @@ public class LoginService extends HttpServlet {
         String pwd = (String) request.getAttribute("pwd");
         try{
             User user = Model.getInstance().searchUser(username, pwd);
-            request.getRequestDispatcher("").forward(request, response);
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
             response.sendRedirect("Pagina1.jsp");

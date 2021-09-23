@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.util.HashMap;
@@ -21,8 +16,9 @@ public class Model {
     }
     private Model(){
         users = new HashMap<>();
-        users.put("111", new User("111","111"));
-        users.put("222", new User("222","222"));        
+        //Users for testing login access with no DB
+        users.put("111", new User("111","111","ADM"));
+        users.put("222", new User("222","222","ADM"));        
     }
     public HashMap<String, User> getUsers(){return users;}
     public void setUsers(HashMap<String, User> users){this.users = users;}

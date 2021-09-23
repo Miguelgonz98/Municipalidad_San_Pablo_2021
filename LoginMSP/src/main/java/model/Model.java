@@ -24,7 +24,7 @@ public class Model {
     public void setUsers(HashMap<String, User> users){this.users = users;}
     public User searchUser(String username, String pwd) throws Exception{
         User u = users.get(username);
-        if(u == null) throw new NotFoundException("Usuario no encontrado");
+        if(u == null) throw new Exception("Usuario no encontrado");
         if (!u.getPwd().equals(pwd)) throw new Exception("Contrasena incorrecta");
         return u;
     }

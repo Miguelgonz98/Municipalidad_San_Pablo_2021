@@ -18,7 +18,7 @@ public class UserDAO extends DAO {
         return uniqueInstance;
     }
     public List<User> listAll() {
-        String cmd = "SELECT u FROM SI_USERS u";
+        String cmd = "SELECT u FROM SI_DB.SI_USERS u";
         eM = getEntityManager();
         Query query = eM.createQuery(cmd);
         return query.getResultList();
@@ -74,7 +74,7 @@ public class UserDAO extends DAO {
     }
 
     public Object validateByEmail(User user) {
-        String cmd = "select From SI_USERS as u WHERE u.FK_EMAIL = :uEmail and u.password = :uPassword";
+        String cmd = "select From SI_DB.SI_USERS as u WHERE u.FK_EMAIL = :uEmail and u.password = :uPassword";
         Query query = eM.createQuery(cmd, User.class);
         query.setParameter("uEmail", user.getUsername());
         query.setParameter("uPassword", user.getPwd());

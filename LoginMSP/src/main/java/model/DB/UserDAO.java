@@ -11,7 +11,7 @@ import javax.persistence.Query;
 
 public class UserDAO extends DAO {
     private static UserDAO uniqueInstance;
-    private UserDAO(){}
+    //private UserDAO(){}
     public static UserDAO getInstance(){
         if (uniqueInstance == null) 
             uniqueInstance = new UserDAO();

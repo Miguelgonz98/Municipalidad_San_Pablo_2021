@@ -29,7 +29,7 @@ public class Model {
     public HashMap<String, User> getUsers(){return users;}
     public void setUsers(HashMap<String, User> users){this.users = users;}
     public User searchUser(String username, String pwd) throws Exception{
-        this.updateModel();
+        //this.updateModel();
         User u = users.get(username);
         if(u == null) throw new Exception("Usuario no encontrado");
         if (!u.getPwd().equals(pwd)) throw new Exception("Contrasena incorrecta");

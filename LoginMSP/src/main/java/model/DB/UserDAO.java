@@ -28,6 +28,7 @@ public class UserDAO extends DAO {
         List<User> usersList = this.listAll();
         for (final User u : usersList) 
             users.put(u.getUsername()+"|"+u.getEmail(), u);
+        System.out.println(users);
         return users;
     }
     public void add(User user) {

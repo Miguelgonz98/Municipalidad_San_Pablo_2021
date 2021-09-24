@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 public class DAO {
     protected static EntityManager eM;
     private static EntityManagerFactory eMF;
-    private static final String PU = "HPU";
+    private static final String PU = "MSPH_HPU";
     
     public DAO() {
         if (eMF == null) eMF = Persistence.createEntityManagerFactory(PU);

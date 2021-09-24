@@ -27,7 +27,8 @@ public class UserDAO extends DAO {
         HashMap<String,User> users = new HashMap<>();
         List<User> usersList = this.listAll();
         for (final User u : usersList) 
-            users.put(u.getUsername()+"|"+u.getEmail(), u);
+            //users.put(u.getUsername()+"|"+u.getEmail(), u);
+            users.put(u.getUsername(), u);
         System.out.println(users);
         return users;
     }

@@ -6,13 +6,11 @@ package model.DB;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 public class DAO {
-
     protected static EntityManager eM;
     private static EntityManagerFactory eMF;
     private static final String PU = "HPU";
-
+    
     public DAO() {
         if (eMF == null) eMF = Persistence.createEntityManagerFactory(PU);
     }

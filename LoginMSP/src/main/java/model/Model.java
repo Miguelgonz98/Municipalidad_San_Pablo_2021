@@ -1,7 +1,7 @@
 package model;
 
 import java.util.HashMap;
-import javax.ws.rs.NotFoundException;
+import model.DB.UserDAO;
 
 /**
  *
@@ -11,17 +11,20 @@ public class Model {
     private static Model uniqueInstance;
     HashMap<String, User> users;
     public static Model getInstance(){
-        if (uniqueInstance == null) uniqueInstance = new Model();
+        if (uniqueInstance == null) 
+            uniqueInstance = new Model();
         return uniqueInstance;
     }
     private Model(){
         users = new HashMap<>();
-        //Users for testing login access with no DB      
     }
     private void updateModel(){
-        users = new HashMap<>();
-        users.put("111", new User("111","111","ADM"));
-        users.put("222", new User("222","222","ADM"));  
+        //Little test cases with no DB connection
+        //users = new HashMap<>();
+        //users.put("111", new User("111","111","ADM","test@test.com"));
+        //users.put("222", new User("222","222","ADM","test2@test.com")); 
+        users = UserDAO.getInstance().listAllHM();
+        System.out.println(users);
     }
     public HashMap<String, User> getUsers(){return users;}
     public void setUsers(HashMap<String, User> users){this.users = users;}

@@ -4,19 +4,19 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
-
+import javax.persistence.Column;
 @Entity
 @Table(name = "SI_USERS")
 public class User {
 
     @Id
-    @javax.persistence.Column(name = "PK_USER")
+    @Column(name = "PK_USER")
     String username;
-    @javax.persistence.Column(name = "FK_official")
+    @Column(name = "FK_official")
     String role;
-    @javax.persistence.Column(name = "FK_email")
+    @Column(name = "FK_email")
     String email;
-    @javax.persistence.Column(name = "password")
+    @Column(name = "password")
     String pwd;
 
     public User(String username, String pwd, String role, String email) {
@@ -70,9 +70,22 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        final User other = (User) obj;
+        if (!Objects.equals(username, other.username)) return false;
+        if (!Objects.equals(role, other.role)) return false;
+        if (!Objects.equals(email, other.email)) return false;
+        if (!Objects.equals(pwd, other.pwd)) return false;
+        return true;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("{Username: ").append(username);
+        sb.append("Username: ").append(username);
         sb.append("E-mail: ").append(email);
         sb.append("Role: ").append(role);
         sb.append("Pwd: ").append(pwd);

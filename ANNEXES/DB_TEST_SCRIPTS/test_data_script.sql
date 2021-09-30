@@ -33,3 +33,5 @@ BEGIN
 END$$
 DELIMITER ;
 SELECT DESENCRYPT_PWD(50);
+
+SELECT u.PK_USER, u.FK_OFFICIAL, u.FK_EMAIL, CAST(u.password as CHAR) from si_db.si_users u; 

@@ -29,7 +29,7 @@ public class LoginService extends HttpServlet {
             session.setAttribute("user", user);
             request.getRequestDispatcher("/Pagina1.jsp").forward(request, response);
         }catch(Exception ex){
-            System.out.printf("%s\n", ex.getMessage());
+            System.err.printf("%s\n", ex.getMessage());
             response.sendRedirect("index.jsp");
         }
         

@@ -20,11 +20,18 @@ public class Model {
     }
     private void updateModel(){
         //Little test cases with no DB connection
-        //users = new HashMap<>();
-        //users.put("111", new User("111","111","ADM","test@test.com"));
-        //users.put("222", new User("222","222","ADM","test2@test.com")); 
-        users = UserDAO.getInstance().listAllHM();
-        System.out.println(users);
+        users = new HashMap<>();
+        //users.put("111", new User("111","111","1","test@test.com"));
+        users.put("222", new User("222","222","1","test2@test.com")); 
+//        try{
+//            users = UserDAO.getInstance().listAllHM();
+//            System.out.println(users);
+//        }catch(Exception ex){
+//            System.err.print(ex.getMessage());
+//            throw ex;
+//        }
+    
+        
     }
     public HashMap<String, User> getUsers(){return users;}
     public void setUsers(HashMap<String, User> users){this.users = users;}

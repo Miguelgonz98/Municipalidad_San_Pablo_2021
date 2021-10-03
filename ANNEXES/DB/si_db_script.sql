@@ -111,6 +111,8 @@ CREATE TABLE IF NOT EXISTS `si_db`.`SI_USER_ROLES` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+
 USE `si_db`;
 DROP procedure IF EXISTS `authenticateViaEmail`;
 DELIMITER $$
@@ -120,6 +122,7 @@ BEGIN
   SELECT PK_USER, FK_official, FK_email, password FROM si_db.SI_USERS WHERE FK_email = emailPrt AND cast(AES_DECRYPT(UNHEX(password),'key') AS char) = passwordPrt;
 END$$
 DELIMITER ;
+
 
 
 USE `si_db`;

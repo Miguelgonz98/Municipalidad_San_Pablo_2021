@@ -20,9 +20,8 @@ public class LoginService extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            //System.out.println("Usuario: "+ username);
-            //System.out.println("Pwd: "+ pwd);
-            Integer username = Integer.parseInt(request.getParameter("username"));
+            //could be username or email
+            String username = (String)request.getParameter("username");
             String pwd = (String) request.getParameter("pwd");
             User user = Model.getInstance().searchUser(username, pwd);
             HttpSession session = request.getSession(true);

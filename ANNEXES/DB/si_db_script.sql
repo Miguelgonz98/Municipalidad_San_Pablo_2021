@@ -112,16 +112,27 @@ CREATE TABLE IF NOT EXISTS `si_db`.`SI_USER_ROLES` (
 ENGINE = InnoDB;
 
 USE `si_db`;
-DROP procedure IF EXISTS `authenticateUser`;
-
+DROP procedure IF EXISTS `authenticateViaEmail`;
 DELIMITER $$
 USE `si_db`$$
-CREATE PROCEDURE `authenticateUser` (emailPrt varchar(45), passwordPrt varchar(45))
+CREATE PROCEDURE `authenticateViaEmail` (emailPrt varchar(45), passwordPrt varchar(45))
 BEGIN
-  SELECT PK_USER, FK_official, FK_email, password FROM si_db.SI_USERS WHERE FK_email = emailPrt AND CAST(AES_DECRYPT(password, 'msph2021') AS CHAR) = passwordPrt;
+  SELECT PK_USER, FK_official, FK_email, password FROM si_db.SI_USERS WHERE FK_email = emailPrt AND cast(AES_DECRYPT(UNHEX(password),'key') AS char) = passwordPrt;
 END$$
-
 DELIMITER ;
+
+
+USE `si_db`;
+DROP procedure IF EXISTS `authenticateViaUsername`;
+DELIMITER $$
+USE `si_db`$$
+CREATE PROCEDURE `authenticateViaUsername` (userPrt int, passwordPrt varchar(45))
+BEGIN
+  SELECT PK_USER, FK_official, FK_email, password FROM si_db.SI_USERS WHERE PK_USER = userPrt AND cast(AES_DECRYPT(UNHEX(password),'key') AS char) = passwordPrt;
+END$$
+DELIMITER ;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

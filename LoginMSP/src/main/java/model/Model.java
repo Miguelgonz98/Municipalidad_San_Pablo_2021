@@ -19,11 +19,7 @@ public class Model {
     private Model(){
         users = new HashMap<>();
     }
-    private void updateModel(){
-        //Little test cases with no DB connection
-        //users = new HashMap<>();
-        //users.put("111", new User("111","111","1","test@test.com"));
-        //users.put("222", new User("222","222","1","test2@test.com")); 
+    private void updateModel(){ 
         try{
             users = UserDAO.getInstance().listAllHM();
             System.out.println(users);
@@ -37,12 +33,18 @@ public class Model {
     public HashMap<Integer, User> getUsers(){return users;}
     public void setUsers(HashMap<Integer, User> users){this.users = users;}
 
-    public User searchUser(Integer username, String pwd) throws Exception{
-        this.updateModel();
-        System.out.print(users);
-        User u = users.get(username);
-        if(u == null) throw new Exception("Usuario no encontrado");
-        if (!u.getPassword().equals(pwd)) throw new Exception("Contrasena incorrecta");
+    public User searchUser(String username, String pwd) throws Exception{
+        User u = null;
+        try{
+            Integer uname = Integer.parseInt(username);
+            u = UserDAO.getInstance().idValidation(uname, pwd);
+            if (u != null) return u;
+        }catch(NumberFormatException e){
+            u = UserDAO.getInstance().emailValidation(username, pwd);
+            if (u != null) return u;
+        }catch(Exception e){
+            throw e;
+        }
         return u;
     }
 }

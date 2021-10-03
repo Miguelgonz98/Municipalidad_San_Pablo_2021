@@ -14,7 +14,7 @@ public class UserDAO extends GenericDAO {
         return uniqueInstance;
     }
     public User emailValidation(String emailPrt, String passwordPrt) {
-        String cmd = "CALL authenticateUser(:emailPrt, :passwordPrt)";
+        String cmd = "CALL authenticateViaEmail(:emailPrt, :passwordPrt)";
 
         em = getEntityManager();
         Session session = em.unwrap(Session.class);
@@ -28,21 +28,29 @@ public class UserDAO extends GenericDAO {
         closeEntityManager();
         return u;
     }
+        public User idValidation(Integer username, String passwordPrt) {
+        String cmd = "CALL authenticateViaUsername(:userPrt, :passwordPrt)";
+        em = getEntityManager();
+        Session session = em.unwrap(Session.class);
+        Query query = session.createSQLQuery(cmd).addEntity(User.class);
+        query.setParameter("userPrt", username);
+        query.setParameter("passwordPrt", passwordPrt);
+        User u = (User) query.getSingleResult();
+        closeEntityManager();
+        return u;
+    }
         public List<User> listAll() {
         try{
             System.out.println(1);
-            String cmd = "SELECT u.PK_USER, u.FK_OFFICIAL, u.FK_EMAIL, "
-                    + "CAST(u.password as CHAR) from si_db.si_users u";
+            String cmd = "SELECT u.idUser, u.official,u.email,cast(AES_DECRYPT(UNHEX(u.password),'key') AS char) from User u";
             em = getEntityManager();
             Query query = em.createQuery(cmd);
-            List<User> l = query.getResultList();
-            l.forEach(u -> {
-                System.out.println(u.toString());
-            });
+            List<User> l = (List<User>) query.getResultList();
             return l;
         }catch(Exception e){
             e.printStackTrace(System.out);
-            return null;
+            System.err.println(e.getMessage());
+            throw e;
         }
     }
     public HashMap<Integer, User> listAllHM(){ //list all users in HashMap type
@@ -59,6 +67,7 @@ public class UserDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
+            System.err.println(ex.getMessage());
         } finally {
             closeEntityManager();
         }
@@ -71,6 +80,7 @@ public class UserDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
+            System.err.println(ex.getMessage());
         } finally {
             closeEntityManager();
         }
@@ -84,6 +94,7 @@ public class UserDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
+            System.err.println(ex.getMessage());
         } finally {
             closeEntityManager();
         }
@@ -92,5 +103,9 @@ public class UserDAO extends GenericDAO {
     public User searchById(User user) {
         em = getEntityManager();
         return (User) em.find(User.class, user.getIdUser());
+    }
+    public User searchByEmail(User user) {
+        em = getEntityManager();
+        return (User) em.find(User.class, user.getEmail());
     }
 }

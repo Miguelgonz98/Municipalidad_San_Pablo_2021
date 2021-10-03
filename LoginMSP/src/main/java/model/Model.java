@@ -36,7 +36,7 @@ public class Model {
     public User searchUser(String username, String pwd) throws Exception{
         User u = null;
         try{
-            this.updateModel();
+            //this.updateModel();
             //System.out.println(users);
             Integer uname = Integer.parseInt(username);
             u = UserDAO.getInstance().idValidation(uname, pwd);
